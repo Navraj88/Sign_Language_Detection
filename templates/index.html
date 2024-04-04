@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hand Gesture Recognition</title>
+    <script>
+        function predictNumbers() {
+            fetch('/set_labels_numbers')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    document.getElementById('prediction').innerText = data.message;
+                });
+        }
+
+        function predictAlphabets() {
+
+            fetch('/set_labels_alphabets')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    document.getElementById('prediction').innerText = data.message;
+                });
+        }
+    </script>
+    <style>
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #prediction {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h1>Hand Gesture Recognition</h1></center>
+    <center><img src="{{ url_for('video_feed') }}" width="640" height="480"></center>
+
+    <div class="button-container">
+        <button onclick="predictNumbers()">Predict Numbers</button>
+        <button onclick="predictAlphabets()">Predict Alphabets</button>
+    </div>
+
+    <div id="prediction"></div>
+</body>
+
+</html>
